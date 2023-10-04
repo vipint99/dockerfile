@@ -2,4 +2,4 @@ collections:
   - ansible.eda
   - cisco.meraki
   - paloaltonetworks.panos
-  - clay584.parse_genie
+    #  - clay584.parse_genie

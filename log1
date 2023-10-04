@@ -1,0 +1,33 @@
+Sending build context to Docker daemon  74.75kB
+Step 1/13 : FROM ubuntu:22.04
+ ---> 01f29b872827
+Step 2/13 : ENV ANSIBLE_CORE_VERSION=2.15.2
+ ---> Using cache
+ ---> 9ce34b1988f7
+Step 3/13 : ENV ANSIBLE_VERSION=8.2.0
+ ---> Using cache
+ ---> 59993f4a3e00
+Step 4/13 : ENV ANSIBLE_LINT=6.17.2
+ ---> Using cache
+ ---> 9131891a4bec
+Step 5/13 : COPY requirements_* ./
+ ---> Using cache
+ ---> 4afb42a4daaa
+Step 6/13 : LABEL or.opencontainers.image.author="Vipin_Tripathi@crgl-thirdparty.com"     org.label-schema.schema-version="1.0"     org.label-schema.build-date=$BUILD_DATE     org.label-schema.name="cnetops/ansible"     org.label-schema.description="Ansible inside Docker"     org.label-schema.vendor="CNETOPS"     org.label-schema.docker.cmd="docker run --rm -it -v $(pwd):/ansible -v ~/.ssh/id_rsa:/root/id_rsa cnetops/ansible:2.15-ubuntu-22.04"
+ ---> Using cache
+ ---> f682f699a999
+Step 7/13 : RUN DEBIAN_FRONTEND=noninteractive apt-get update &&     apt-get install -y gnupg2 python3-pip sshpass git openssh-client openssl libssl-dev zlib1g  zlib1g-dev  libcurl4-openssl-dev &&     rm -rf /var/lib/apt/lists/* &&     apt-get clean
+ ---> Using cache
+ ---> 16149ce42fc5
+Step 8/13 : RUN python3 -m pip install --upgrade pip cffi &&     pip3 install ansible-core==${ANSIBLE_CORE_VERSION} &&     pip3 install ansible==${ANSIBLE_VERSION} ansible-lint==${ANSIBLE_LINT} &&     pip3 install mitogen jmespath pyparsing pyyaml==5.3.1 pycurl &&     pip install --upgrade pywinrm &&     rm -rf /root/.cache/pip
+ ---> Using cache
+ ---> a0ae85eee8be
+Step 9/13 : RUN python3 -m pip install -r requirements_pip.txt
+ ---> Using cache
+ ---> 33b0d487bf8c
+Step 10/13 : RUN ansible-galaxy install -r requirements_collections.yml &&     rm -rf /root/.cache/pip
+ ---> Running in 809dfd8799db
+[91mERROR! Failed to resolve the requested dependencies map. Could not satisfy the following requirements:
+* clay584.parse_genie:* (direct request)
+[0mStarting galaxy collection install process
+Process install dependency map
